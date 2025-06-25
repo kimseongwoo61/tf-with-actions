@@ -45,7 +45,13 @@ jobs:
         echo "--- Plan Output Preview ---"
         head -20 plan.txt
         echo "--- End Preview ---"
-
+    - name: Upload Plan Artifact
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: terraform-plan-${{ github.run_number }}
+        path: plan.txt
+        retention-days: 30
     - name: Terraform Apply
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: terraform apply -auto-approve
