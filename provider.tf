@@ -12,6 +12,14 @@ terraform {
       source  = "hashicorp/local"
       version = ">= 2.0"
     }
+  } 
+  cloud { 
+    
+    organization = "devops_asw" 
+
+    workspaces { 
+      name = "devops_aws" 
+    }  
   }
 }
 
