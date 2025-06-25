@@ -10,7 +10,7 @@ output "dynamodb_lock_table" {
 
 output "backend_instructions" {
   description = "Instructions for using the remote backend"
-  value = <<-EOT
+  value       = <<-EOT
     Backend setup complete!
     
     To use this remote backend:

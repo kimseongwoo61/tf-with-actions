@@ -19,10 +19,10 @@ module "dynamodb_lock" {
 
 # 백엔드 설정 모듈
 module "backend_config" {
-  source           = "./modules/backend"
-  s3_bucket        = module.s3_backend.bucket_name
-  dynamodb_table   = module.dynamodb_lock.table_name
-  
+  source         = "./modules/backend"
+  s3_bucket      = module.s3_backend.bucket_name
+  dynamodb_table = module.dynamodb_lock.table_name
+
   depends_on = [
     module.s3_backend,
     module.dynamodb_lock
