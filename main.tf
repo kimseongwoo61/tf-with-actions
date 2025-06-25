@@ -1,3 +1,5 @@
+# infra-test
+
 # 버킷 이름 중복 방지를 위한 랜덤 문자열
 resource "random_string" "bucket_suffix" {
   length  = 8
@@ -5,7 +7,7 @@ resource "random_string" "bucket_suffix" {
   upper   = false
 }
 
-# S3 백엔드 버킷 생성
+# S3 백엔드 버킷 생성asdf
 module "s3_backend" {
   source      = "./modules/s3"
   bucket_name = "my-terraform-state-bucket-${random_string.bucket_suffix.result}"
