@@ -1,3 +1,5 @@
+# infra-test
+
 # 버킷 이름 중복 방지를 위한 랜덤 문자열
 resource "random_string" "bucket_suffix" {
   length  = 8
