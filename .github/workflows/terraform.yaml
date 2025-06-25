@@ -36,15 +36,18 @@ jobs:
     - name: Terraform Validate
       run: terraform validate
 
-    - name: Terraform Plan
-      # if: github.event_name == 'push'
-      run:
-        echo "Running Terraform Plan..."
-        terraform plan -no-color > plan.txt 2>&1
-        echo "Plan completed. Contents saved to plan.txt"
-        echo "--- Plan Output Preview ---"
-        head -20 plan.txt
-        echo "--- End Preview ---"
+    - name: Terraform Plan Artifact
+      if: github.event_name == 'push' || github.event_name == 'pull_request'
+      run: 
+        terraform plan -no-color > plan.txt || true
+
+    - name: terraform upload plan
+      if: github.event_name == 'push' || github.event_name == 'pull_request'
+      uses: actions/upload-artifact@v4
+      with:
+        name:  terraform-plan
+        path: plan.txt
+
 
     - name: Terraform Apply
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
